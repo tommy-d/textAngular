@@ -439,7 +439,7 @@ angular.module('textAngular.taBind', ['textAngular.factories', 'textAngular.DOM'
 									};
 									_list.lastLevelMatch = null;
 								};
-								for(var i = 0; i <= dom[0].childNodes.length; i++){
+								for(var i = 0; i < dom[0].childNodes.length; i++){
 									if(!dom[0].childNodes[i] || dom[0].childNodes[i].nodeName === "#text" || dom[0].childNodes[i].tagName.toLowerCase() !== "p") continue;
 									var el = angular.element(dom[0].childNodes[i]);
 									var _listMatch = (el.attr('class') || '').match(/MsoList(Bullet|Number|Paragraph)(CxSp(First|Middle|Last)|)/i);
@@ -487,9 +487,11 @@ angular.module('textAngular.taBind', ['textAngular.factories', 'textAngular.DOM'
 										_list.element.append(_list.lastLi);
 										_list.lastLi.html(el.html().replace(/<!(--|)\[if !supportLists\](--|)>[\s\S]*?<!(--|)\[endif\](--|)>/ig, ''));
 										el.remove();
+										i--;
 									}else{
 										_resetList(false);
 										targetDom.append(el);
+										i--;
 									}
 								}
 								var _unwrapElement = function(node){
